@@ -7,12 +7,13 @@ import java.util.List;
 
 /**
  * @Author healist
- * @Description
+ * @Description java8中已经提供了filter，这里简单演示一下自定义filter的新老版本的实现
  * @Create 2018-03-16 上午10:46
  */
 public class AppleFilter {
 
     // 老的写法，以下会造成代码重复
+
     public static List<Apple> filterGreenApples(List<Apple> inventory) {
         List<Apple> result = new ArrayList<>();
         for(Apple apple : inventory) {
