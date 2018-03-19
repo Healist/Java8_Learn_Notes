@@ -1,8 +1,11 @@
 package com.healist;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -36,7 +39,7 @@ public class AppleFilter {
 
     // java8 合并成一个
 
-
+    @FunctionalInterface
     public interface Predicate<T> {
         boolean test(T t);
     }
@@ -55,22 +58,26 @@ public class AppleFilter {
     public static void main(String[] args) {
         List<Apple> inventory = new ArrayList<>();
         // ... 省略添加苹果的操作
+        inventory.add(new Apple(120, "green"));
+        inventory.add(new Apple(90, "red"));
         filterApples(inventory, Apple::isGreenApple);
         filterApples(inventory, Apple::isHeavyApple);
-
 
         //还有一种比较简便的写法
         filterApples(inventory, (Apple a) -> "green".equals(a.getColor()));
         filterApples(inventory, (Apple a) -> a.getWeight()>100);
+        inventory.sort(Comparator.comparing(Apple::getWeight));
     }
 
     @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
     private static class Apple {
         int weight;
         String color;
 
         public static boolean isGreenApple(Apple apple) {
-            return "grenn".equals(apple.getColor());
+            return "green".equals(apple.getColor());
         }
 
         public static boolean isHeavyApple(Apple apple) {
