@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -67,6 +68,14 @@ public class AppleFilter {
         filterApples(inventory, (Apple a) -> "green".equals(a.getColor()));
         filterApples(inventory, (Apple a) -> a.getWeight()>100);
         inventory.sort(Comparator.comparing(Apple::getWeight));
+
+
+        //sort
+        List<String> str = Arrays.asList("a", "b", "A", "B");
+        //以下等同于 str.sort((str1, str2) -> str1.compareToIgnoreCase(str2));
+        str.sort(String::compareToIgnoreCase);
+
+
     }
 
     @Data
