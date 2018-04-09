@@ -1,10 +1,18 @@
 package com.healist;
 
+import com.sun.javafx.image.IntPixelSetter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -74,6 +82,41 @@ public class StreamLearn {
         int sum = numbers.stream().reduce(1, (a, b) -> a*b);
         Optional<Integer> max = numbers.stream().reduce(Integer::max);
         System.out.println(sum + "," + max.get());
+
+
+        // stream的装箱和拆箱
+        int cal = list.stream().mapToInt(Apple::getWeight).sum();
+
+        IntStream intStream = list.stream().mapToInt(Apple::getWeight);
+        Stream<Integer> stream = intStream.boxed();
+
+
+        // Stream 的创建
+
+        // 由值创建流
+        Stream<String> stringStream = Stream.of("Java8", "Lamdas", "In", "Action");
+        //空流
+        Stream<String> emptyStream = Stream.empty();
+
+        // 数组创建流
+        int[] numbers = {2,3,5,7,11,13};
+        int sum = Arrays.stream(numbers).sum();
+
+        // 文件生成流
+        try {
+                Stream<String> lines = Files.lines(Paths.get("data.txt"), Charset.defaultCharset());
+                long uniqueWords = lines.flatMap(line -> Arrays.stream(line.split(" ")))
+                        .distinct()
+                        .count();
+                System.out.println(uniqueWords);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        // 创建无限流 iterate 和 generate函数方法
+
 
     }
 
