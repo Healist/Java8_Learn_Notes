@@ -99,8 +99,8 @@ public class StreamLearn {
         Stream<String> emptyStream = Stream.empty();
 
         // 数组创建流
-        int[] numbers = {2,3,5,7,11,13};
-        int sum = Arrays.stream(numbers).sum();
+        int[] arr = {2,3,5,7,11,13};
+        int sum2 = Arrays.stream(arr).sum();
 
         // 文件生成流
         try {
@@ -119,6 +119,3 @@ public class StreamLearn {
 
 
     }
-
-
-}
